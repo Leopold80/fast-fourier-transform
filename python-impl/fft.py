@@ -10,7 +10,7 @@ import math
 from typing import List, Callable, Union
 
 
-def _reverse_bits(n: int, n_bits: int = 32) -> int:
+def _reverse_bits(n: int, n_bits: int) -> int:
     """
     二进制位翻转
     例：
