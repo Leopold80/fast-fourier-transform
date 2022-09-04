@@ -21,6 +21,12 @@ fn get_freqs(n: usize, fs: f64) -> Vec<f64> {
     (0..n).map(|x| x as f64 * df).collect()
 }
 
+fn fft(data: &[Complex64]) -> Vec<Complex64> {
+    let data = array_reorder(data).unwrap();
+    let n_data = data.len();
+    let log2n = if n_data == 0 { 0 } else {(n_data as f64).log2() as usize};
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
