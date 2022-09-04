@@ -24,6 +24,20 @@ def _reverse_bits(n: int, n_bits: int) -> int:
     return int(bin(n)[2:].rjust(n_bits, "0")[::-1], base=2)
 
 
+""""another implementation for reverse bits"""
+# def _reverse_bits(n: int, n_bits: int) -> int:
+#     n = [(n >> i) & 0x01 for i in range(n_bits)]
+#     try:
+#         from functools import reduce
+#         fn = lambda acc, i_x: (i_x[1] << (n_bits - i_x[0] - 1)) | acc
+#         return reduce(fn, enumerate(n), 0)
+#     except ImportError:
+#         ret = 0
+#         for i, x in enumerate(n):
+#             ret |= x << (n_bits - i - 1)
+#         return ret
+
+
 def _array_reorder(arr: List) -> List:
     n_bits = math.log2(len(arr))
     assert n_bits - int(n_bits) == 0, "len of the array must be 2 ** n."
