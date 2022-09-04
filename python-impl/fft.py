@@ -42,7 +42,7 @@ def _array_reorder(arr: List) -> List:
     n_bits = math.log2(len(arr))
     assert n_bits - int(n_bits) == 0, "len of the array must be 2 ** n."
     n_bits = int(n_bits)
-    indexes = [_reverse_bits(x, n_bits) for x in list(range(len(arr)))]
+    indexes = [_reverse_bits(x, n_bits) for x in range(len(arr))]
     return [arr[idx] for idx in indexes]
 
 
