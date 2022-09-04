@@ -16,6 +16,11 @@ fn array_reorder<T: Copy>(arr: &[T]) -> Result<Vec<T>, &str> {
     Ok(indexes.map(|i| arr[i]).collect())
 }
 
+fn get_freqs(n: usize, fs: f64) -> Vec<f64> {
+    let df = fs / (n as f64 - 1.);
+    (0..n).map(|x| x as f64 * df).collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
