@@ -14,9 +14,9 @@ def _reverse_bits(n: int, n_bits: int) -> int:
     """
     二进制位翻转
     例：
-    x = 0b001  
-    print(bin(_reverse_bits(x, 3)))  
-    输出0b100  
+    x = 0b001
+    print(bin(_reverse_bits(x, 3)))
+    输出0b100
     :param n: 待翻转的数据
     :param n_bits: 翻转的操作范围
     :return: 翻转后的数据
@@ -118,7 +118,7 @@ def band_pass_filter(seq: List[float], f_low: float, f_high: float, fs: int) -> 
     for i, f in enumerate(freqs):
         if not (f_low <= f <= f_high):
             y_fft[i] = 0j
-    y_ifft = ifft(y_fft, postprocess=lambda x: x.real)
+    y_ifft = ifft(y_fft, postprocess=lambda x: 2. * x.real)
     return y_ifft
 
 
@@ -127,9 +127,9 @@ if __name__ == "__main__":
     import numpy as np
 
 
-    def single_generator(a, fc, phase):
+    def single_generator(a, fc, phase, c=0):
         def single_fn(x):
-            return [a * math.sin(2 * math.pi * fc * x_ + phase) for x_ in x]
+            return [a * math.sin(2 * math.pi * fc * x_ + phase) + c for x_ in x]
 
         return single_fn
 
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     def band_pass_filter_test():
         n = 2 << 9  # 1024
         # n = 2 << 7  # 256
-        single_fn0 = single_generator(a=10., fc=2, phase=0)
+        single_fn0 = single_generator(a=10., fc=2, phase=math.pi / 2, c=10)
         single_fn1 = single_generator(a=1., fc=50, phase=0.)
         t = list(np.linspace(0, 2, n))
         # y = single_fn0(t)
@@ -191,5 +191,5 @@ if __name__ == "__main__":
         plt.show()
 
 
-    fft_test()
-    # band_pass_filter_test()
+    # fft_test()
+    band_pass_filter_test()
